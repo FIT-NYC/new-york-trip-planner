@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NYC trip plan</title>
+<title>NYC Pink Week</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800;900&family=Space+Mono:wght@700&display=swap">
@@ -141,8 +141,8 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
 <body>
 <div class="wrap">
   <header class="hero">
-    <div class="madeby">Made by Emile</div>
-    <h1>NYC Trip <span>Plan</span></h1>
+    <div class="madeby">Made by Emile hé</div>
+    <h1>NYC Pink <span>Week</span></h1>
     <p class="sub">Tue 24 – Mon 30 Nov 2026 · Thanksgiving week · home: Outpost Williamsburg, 186 N 6th St (L at Bedford Av)</p>
     <div class="crew"><span>Wannes</span><span>Aaike</span><span>Stinne</span><span>Emile</span></div>
   </header>
@@ -175,7 +175,7 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
       <div class="card"><h3>Weather</h3><p>Cool, 8–13°C (46–55°F). Thursday (Thanksgiving) brings heavy rain and wind: bring a raincoat, not an umbrella. Friday to Sunday look dry with sun and clouds. Sunset is around 4:30pm, so plan the views early.</p></div>
       <div class="card"><h3>Thanksgiving = closed</h3><p>On Thursday a lot of shops and some restaurants close or keep short hours. Friday is Black Friday: shops open early and it gets crowded. Check opening hours before you go anywhere on Thursday.</p></div>
       <div class="card"><h3>Subway</h3><p>Tap your own contactless card or phone at the gate. About $3 a ride; after 12 rides in 7 days the rest of the week is free. Our line is the L from Bedford Av.</p></div>
-      <div class="card"><h3>Going out</h3><ul><li>Be in line before 11pm.</li><li>Get tickets or a guest-list spot during the day.</li><li>Bring your passport: 21+ and ID checks everywhere.</li></ul></div>
+      <div class="card"><h3>Going out</h3><ul><li>Be in line before 11pm.</li><li>Get tickets or a guest-list spot during the day. Party prices and line-ups come from the nightlife guide of 24 Nov and can change.</li><li>Bring your passport: 21+ and ID checks everywhere.</li></ul></div>
     </div>
   </section>
 
@@ -207,7 +207,13 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
       { label: "Summit One Vanderbilt", h: "Sunset at Summit One Vanderbilt", p: "Mirror rooms and glass ledges, right next to Grand Central. Book a time slot around 4pm.", pin: P("Summit One Vanderbilt", "Summit One Vanderbilt, New York", 40.7530, -73.9787) },
       { label: "Edge (Hudson Yards)", h: "Sunset at Edge", p: "Outdoor sky deck with a glass floor at Hudson Yards. Book a time slot around 4pm.", pin: P("Edge, Hudson Yards", "Edge Hudson Yards, New York", 40.7537, -74.0011) },
       { label: "Top of the Rock", h: "Sunset at Top of the Rock", p: "The classic view with the Empire State Building and Central Park. Book a time slot around 4pm.", pin: P("Top of the Rock", "Top of the Rock, New York", 40.7593, -73.9794) },
+      { label: "Emile's office (NYT Building)", h: "Sunset at Emile's office", p: "The New York Times Building, 620 8th Ave: Midtown from the inside, and free. Friday is a building holiday, so check we can get in; if not, the visit moves to Saturday 18:00.", pin: P("Emile's office: NYT Building", "The New York Times Building, 620 8th Ave, New York", 40.7562, -73.9904) },
       { label: "Skip it", h: "No view deck this time", p: "More time for Black Friday shopping and a drink at golden hour.", pin: null }
+    ] },
+    { id: "hh", title: "Happy hour: when?", opts: [
+      { label: "Wednesday after work (Hell's Kitchen)", h: "Happy hour after Emile's work", p: "Around 5:30pm near the office in Hell's Kitchen (9th Ave has lots of bars with happy-hour deals), then straight on to Wednesday night.", pin: P("Happy hour: Hell's Kitchen", "9th Ave & W 44th St, New York", 40.7600, -73.9915) },
+      { label: "Friday at Motek ($5 drinks)", h: "Happy hour at Motek", p: "184 Bleecker St. $5 cocktails, wine, beer and arayes, normally weekdays 2–6pm. No reservations for happy hour, so be there early; check they run it on Black Friday.", pin: P("Motek (happy hour)", "Motek, 184 Bleecker St, New York", 40.7290, -74.0005) },
+      { label: "No happy hour", h: "No happy hour", p: "", pin: null }
     ] },
     { id: "museum", title: "Saturday museum", opts: [
       { label: "The Met", h: "The Met", p: "Huge art museum on the edge of Central Park. Don't try to see it all: pick two wings.", pin: P("The Met", "The Metropolitan Museum of Art", 40.7794, -73.9632) },
@@ -216,18 +222,30 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
       { label: "Museum of Ice Cream", h: "Museum of Ice Cream", p: "558 Broadway, SoHo. Pink, silly, with a sprinkle pool. Book a time slot.", pin: P("Museum of Ice Cream", "Museum of Ice Cream, 558 Broadway, New York", 40.7237, -73.9977) },
       { label: "No museum", h: "No museum: more park", p: "More Central Park and a walk down the Upper East Side.", pin: null }
     ] },
-    { id: "night", title: "Big night out: which night?", opts: [
-      { label: "Friday 27" }, { label: "Saturday 28" }, { label: "Both!" }
+    { id: "fri", title: "Friday night party", opts: [
+      { label: "Gabriela → Mija", h: "Gabriela at 9pm → Mija around midnight", p: "Start at Cherry Pop at Gabriela (90 Wythe Ave, electro and indie pop, free before 10pm, $20 cash after), then Mija Invites at The Chocolate Factory (70 Scott Ave, trance and hard techno warehouse rave, $28+, until 4am).", pin: P("Gabriela (Cherry Pop)", "Gabriela, 90 Wythe Ave, Brooklyn", 40.7210, -73.9580) },
+      { label: "Y2K Party at S.O.B.'s", h: "Y2K Party at S.O.B.'s", p: "204 Varick St, from 11pm, $10–25. 2000s–2010s pop, EDM, hip-hop and R&B: familiar hits, singalong energy.", pin: P("S.O.B.'s", "S.O.B.'s, 204 Varick St, New York", 40.7283, -74.0055) },
+      { label: "Zack Martino at Nebula", h: "Zack Martino at Nebula", p: "135 W 41st St, 11pm–4am, $28+. Melodic house, EDM and dance remixes; big club with LED screens.", pin: P("Nebula", "Nebula, 135 W 41st St, New York", 40.7546, -73.9867) },
+      { label: "Guy Gerber at Brooklyn Pacha", h: "Guy Gerber at Brooklyn Pacha", p: "140 Stewart Ave, 10pm–4am, $40+. Deep and melodic house, Ibiza-style.", pin: P("Brooklyn Pacha", "Brooklyn Pacha, 140 Stewart Ave, Brooklyn", 40.7098, -73.9283) },
+      { label: "No party Friday", h: "No party Friday: bars after dinner", p: "Save the energy for Saturday.", pin: null }
     ] },
-    { id: "party", title: "Big night out: where?", opts: [
-      { label: "Marquee (Chelsea)", h: "Party at Marquee", p: "289 10th Ave. Big club, hip-hop and open format, 11pm to 4am. Tickets or guest list during the day.", pin: P("Marquee", "Marquee New York, 289 10th Ave", 40.7500, -74.0027) },
-      { label: "Polygon Brooklyn: all R&B night", h: "All-R&B night at Polygon Brooklyn", p: "R&B classics, 2000s favourites and today's hits all night. Buy tickets in advance.", pin: null },
-      { label: "The DL (Lower East Side)", h: "Party at The DL", p: "95 Delancey St. Club with a rooftop, hip-hop, pop and R&B.", pin: P("The DL", "The DL, 95 Delancey St, New York", 40.7188, -73.9892) },
-      { label: "Loosie's (Williamsburg)", h: "Party at Loosie's", p: "Dance bar close to home, the DJs play a mix of everything. Easy walk back.", pin: P("Loosie's", "Loosie's, 91 S 6th St, Brooklyn", 40.7105, -73.9654) },
-      { label: "Le Bain (Meatpacking)", h: "Party at Le Bain", p: "Rooftop on The Standard hotel with skyline views. Check the DJ first: mostly house music.", pin: P("Le Bain", "Le Bain, The Standard High Line, New York", 40.7409, -74.0080) }
+    { id: "sat", title: "Saturday night party", opts: [
+      { label: "EURODANCE Party at Market Hotel", h: "EURODANCE Party at Market Hotel", p: "1140 Myrtle Ave, from 11pm, 20+, $20–30. Eurodance, classic trance and Europop: Cascada, Darude, Alice Deejay (the music, not live acts).", pin: P("Market Hotel", "Market Hotel, 1140 Myrtle Ave, Brooklyn", 40.6976, -73.9353) },
+      { label: "Space 92 at 99 Scott", h: "Space 92 at 99 Scott", p: "99 Scott Ave, 10pm–4am, about $26. Peak-time and acid techno, proper rave.", pin: P("99 Scott", "99 Scott Ave, Brooklyn", 40.7120, -73.9265) },
+      { label: "Felix Da Housecat at House of Yes", h: "Felix Da Housecat at House of Yes", p: "2 Wyckoff Ave, 10pm–4am, $14+. Electro, house and disco with costumes and performers.", pin: P("House of Yes", "House of Yes, 2 Wyckoff Ave, Brooklyn", 40.7068, -73.9234) },
+      { label: "John Summit at Barclays Center", h: "John Summit at Barclays Center", p: "Arena show at 7pm (so dinner after), tech house and EDM. Resale from about $162.", pin: P("Barclays Center", "Barclays Center, Brooklyn", 40.6826, -73.9754) },
+      { label: "Mathame at Brooklyn Pacha", h: "Mathame at Brooklyn Pacha", p: "140 Stewart Ave, 10pm–4am, $125. Melodic techno and progressive house.", pin: P("Brooklyn Pacha", "Brooklyn Pacha, 140 Stewart Ave, Brooklyn", 40.7098, -73.9283) },
+      { label: "No party Saturday", h: "No party Saturday: bars after dinner", p: "", pin: null }
+    ] },
+    { id: "sun", title: "Sunday afternoon rooftop party", opts: [
+      { label: "Yes, rooftop party", h: "Rooftop party: Chus & Ceballos at Superior Ingredients", p: "74 Wythe Ave, 2–10pm, $36+. Tribal, tech and progressive house on a heated rooftop, 10 minutes from home.", pin: P("Superior Ingredients rooftop", "Superior Ingredients, 74 Wythe Ave, Brooklyn", 40.7222, -73.9572) },
+      { label: "No, skating and chill", h: "Brooklyn Bridge & DUMBO", p: "If you didn't do it last time: the Washington St photo spot, then walk the bridge into Manhattan.", pin: P("DUMBO (Washington St)", "Washington Street & Water Street, Brooklyn", 40.7033, -73.9894) }
     ] }
   ];
+  var ORDER = ["eve", "hh", "parade", "view", "museum", "fri", "sat", "sun"];
+  POLL.sort(function (a, b) { return ORDER.indexOf(a.id) - ORDER.indexOf(b.id); });
   var Q = {}; POLL.forEach(function (q) { Q[q.id] = q; });
+  var OFFICE = "Emile's office (NYT Building)";
 
   /* ---------- The week ---------- */
   var DAYS = [
@@ -244,7 +262,8 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
         { t: "11:15", h: "Shopping at Empire Outlets", p: "Outlet mall right next to the ferry terminal on Staten Island. Normally open 10am–8pm; check holiday hours.", who: "the two of you", pin: P("Empire Outlets", "Empire Outlets, Staten Island", 40.6437, -74.0736) },
         { t: "15:00", h: "Ferry back to Manhattan", who: "the two of you" },
         { t: "16:00", h: "Macy's balloon inflation", p: "The parade balloons get blown up next to the Natural History Museum (W 77th–81st St). Public viewing roughly 1–6pm with long lines; check Macy's for the final times.", tags: ["opt"], pin: P("Balloon inflation", "W 79th St & Central Park West, New York", 40.7820, -73.9725) },
-        { t: "19:00", poll: "eve", tags: ["vote"] }
+        { t: "17:30", poll: "hh", show: ["Wednesday after work (Hell's Kitchen)"], tags: ["vote"] },
+        { t: "19:30", poll: "eve", tags: ["vote"] }
       ] },
     { id: "thu", b: "T", name: "Thanksgiving", date: "Thu 26 Nov", color: "var(--thu)", wx: "11°C · heavy rain", rain: true,
       lede: "Parade in the morning, together for lunch. From 4pm the hosts are at a Thanksgiving dinner and the two of you have the city to yourselves. Many places are closed today.",
@@ -265,11 +284,11 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
       lede: "Shops open early and get busy. View at sunset, and maybe the big night out.",
       items: [
         { t: "10:30", h: "Black Friday shopping in SoHo", p: "Broadway and the side streets. Go early, it gets crowded fast.", pin: P("SoHo shopping", "Broadway & Prince St, New York", 40.7246, -73.9977) },
-        { t: "13:00", h: "Bryant Park Winter Village", p: "Holiday market stalls, food, and a free ice rink (pay for skates).", pin: P("Bryant Park Winter Village", "Bryant Park, New York", 40.7536, -73.9832) },
-        { t: "14:30", h: "Holiday windows on Fifth Avenue", p: "Walk up Fifth from 42nd to 59th: department store windows and the big stores.", pin: P("Fifth Avenue windows", "Saks Fifth Avenue, New York", 40.7580, -73.9771) },
+        { t: "13:30", poll: "hh", show: ["Friday at Motek ($5 drinks)"], alt: { h: "Lunch in SoHo / the Village", p: "Plenty of spots around Bleecker St." }, tags: ["vote"] },
+        { t: "15:00", h: "Bryant Park Winter Village & Fifth Avenue windows", p: "Holiday market and free ice rink (pay for skates), then walk up Fifth Avenue past the holiday windows.", pin: P("Bryant Park Winter Village", "Bryant Park, New York", 40.7536, -73.9832) },
         { t: "16:00", poll: "view", tags: ["vote"] },
-        { t: "19:30", h: "Dinner" },
-        { t: "22:30", poll: "party", night: ["Friday 27", "Both!"], tags: ["vote"] }
+        { t: "19:00", h: "Dinner" },
+        { t: "21:00", poll: "fri", tags: ["vote"] }
       ] },
     { id: "sat", b: "S", name: "Park, museum, tram", date: "Sat 28 Nov", color: "var(--sat)", wx: "11°C · sun & clouds",
       lede: "The dry day for the outdoor classics.",
@@ -278,15 +297,16 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
         { t: "11:30", h: "Central Park walk", p: "Columbus Circle → Bethesda Terrace → Bow Bridge → the Mall. Late-autumn colours.", tags: ["must"], pin: P("Central Park (Bethesda Terrace)", "Bethesda Terrace, Central Park", 40.7740, -73.9708) },
         { t: "13:30", poll: "museum", tags: ["vote"] },
         { t: "16:00", h: "Roosevelt Island Tram", p: "59th St & 2nd Ave. Same price as a subway ride, tap your card. Ride over at sunset (about 4:30), walk a bit, ride back.", tags: ["must"], pin: P("Roosevelt Island Tram", "Roosevelt Island Tramway, E 59th St, New York", 40.7612, -73.9644) },
-        { t: "19:30", h: "Dinner" },
-        { t: "22:30", poll: "party", night: ["Saturday 28", "Both!"], tags: ["vote"] }
+        { t: "18:00", office: true },
+        { t: "19:30", h: "Dinner in Hell's Kitchen", p: "Right around the office, lots of choice on 9th Ave." },
+        { t: "22:30", poll: "sat", tags: ["vote"] }
       ] },
     { id: "sun", b: "S", name: "Skating & Brooklyn", date: "Sun 29 Nov", color: "var(--sun-day)", wx: "13°C · sun & clouds",
       lede: "Slow morning, ice skating by the river, last night together.",
       items: [
         { t: "11:00", h: "Brunch in Williamsburg" },
         { t: "12:30", h: "Ice skating at Domino Park", p: "Outdoor rink on the East River with the Manhattan skyline. Weekends from 10:30am. About $24 entry + $13 skates for visitors; buy tickets online at dominopark.com.", tags: ["must"], pin: P("Domino Park ice rink", "Domino Park, 15 River St, Brooklyn", 40.7146, -73.9686) },
-        { t: "14:30", h: "Brooklyn Bridge & DUMBO", p: "If you didn't do it last time: the Washington St photo spot, then walk the bridge into Manhattan.", tags: ["opt"], pin: P("DUMBO (Washington St)", "Washington Street & Water Street, Brooklyn", 40.7033, -73.9894) },
+        { t: "14:30", poll: "sun", tags: ["vote"] },
         { t: "19:00", h: "Last-night dinner", p: "Somewhere nice in Williamsburg, all four of us." }
       ] },
     { id: "mon", b: "M", name: "Fly home", date: "Mon 30 Nov", color: "var(--mon)", wx: "11°C · cloudy",
@@ -313,14 +333,23 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
   }
 
   /* resolve a poll-driven item into what to show */
+  function officeItem() {
+    var v = tally("view");
+    var officeOnFriday = v.lead.length && v.lead[0].label === OFFICE;
+    return officeOnFriday
+      ? { h: "Backup: Emile's office by night", p: "Only if Friday's visit didn't work out (Thursday and Friday are building holidays). Otherwise: drinks in Hell's Kitchen.", pin: null, line: "Office won the Friday view vote", tags: ["opt"] }
+      : { h: "Emile's office by night: The New York Times Building", p: "620 8th Ave. Thursday and Friday are building holidays, so Saturday is the safe day. Then dinner around the corner.", pin: P("Emile's office: NYT Building", "The New York Times Building, 620 8th Ave, New York", 40.7562, -73.9904), tags: ["must"] };
+  }
+
   function resolve(it) {
     var t = tally(it.poll), q = Q[it.poll];
-    if (it.night) {
-      var nt = tally("night");
-      if (nt.lead.length) {
-        var on = nt.lead.some(function (o) { return it.night.indexOf(o.label) > -1; });
-        if (!on) return { skip: true, h: "No big night out tonight", p: "The vote put the party on the other night. Bars near home if you feel like it.", line: "Night vote: " + nt.lead.map(function (o) { return o.label; }).join(" / ") };
+    if (it.show) {
+      var label = it.show[0];
+      if (!t.lead.length) {
+        var o0 = q.opts.filter(function (o) { return o.label === label; })[0];
+        return { h: "If voted: " + o0.h, p: o0.p, line: "No votes yet: vote above", pending: true };
       }
+      if (t.lead[0].label !== label) return it.alt ? { h: it.alt.h, p: it.alt.p, pin: it.alt.pin || null, line: "", noTag: true } : { hide: true };
     }
     if (!t.lead.length) {
       return { h: q.title, p: "Not decided yet. Options: " + q.opts.map(function (o) { return o.label; }).join(", ") + ".", line: "No votes yet: vote above", pending: true };
@@ -344,10 +373,11 @@ footer { margin-top: 30px; text-align: center; font-family: var(--display); colo
     document.getElementById("days").innerHTML = DAYS.map(function (d) {
       var routeStops = [];
       var rows = d.items.map(function (it) {
-        var h = it.h, p = it.p, pin = it.pin, line = "", cls = "";
-        if (it.poll) { var r = resolve(it); h = r.h; p = r.p; pin = r.pin || null; line = r.line; cls = r.voted ? "voted" : ""; }
+        var h = it.h, p = it.p, pin = it.pin, line = "", cls = "", itags = it.tags;
+        if (it.poll) { var r = resolve(it); if (r.hide) return ""; h = r.h; p = r.p; pin = r.pin || null; line = r.line; cls = r.voted ? "voted" : ""; if (r.noTag) itags = []; }
+        if (it.office) { var oi = officeItem(); h = oi.h; p = oi.p; pin = oi.pin; line = oi.line || ""; itags = oi.tags; cls = "hl"; }
         if (pin) { no++; pin = { n: pin.n, q: pin.q, lat: pin.lat, lon: pin.lon, no: no, day: d }; allPins.push(pin); routeStops.push(pin.q); }
-        var tags = (it.tags || []).map(function (t) { return '<span class="tag ' + t + '">' + ({ must: "Must", vote: "Voted", opt: "Optional" })[t] + "</span>"; }).join("");
+        var tags = (itags || []).map(function (t) { return '<span class="tag ' + t + '">' + ({ must: "Must", vote: "Voted", opt: "Optional" })[t] + "</span>"; }).join("");
         if (it.who) tags += '<span class="tag who">' + esc(it.who) + "</span>";
         var link = pin ? '<a class="maplink" href="' + gm(pin.q) + '" target="_blank" rel="noopener">Map #' + pin.no + "</a>" : "";
         var ideas = it.ideas ? '<ul class="ideas">' + it.ideas.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "";
