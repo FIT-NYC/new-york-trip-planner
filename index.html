@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NYC Pink Week</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nunito:wght@400;600;800;900&family=Space+Mono:wght@700&display=swap">
+<style>
+/* Layout: one phone column on a polka-dot pink ground; days are sticker cards; the plan rewrites itself from the vote. */
+:root {
+  --bg: #ffe3f0;
+  --dot: #ffcde4;
+  --paper: #fff8fc;
+  --ink: #3a0b2b;
+  --muted: #8b4a73;
+  --line: #f5b4d3;
+  --pink: #ff4fa3;
+  --hot: #e0007a;
+  --sun: #ffd93d;
+  --sun-ink: #3a2a00;
+  --water: #f6c9df;
+  --land: #fff8fc;
+  --park: #c8f1d8;
+  --tue: #b65cff; --wed: #ff7a59; --thu: #c2185b; --fri: #ff4fa3; --sat: #7c5cff; --sun-day: #ff9f1c; --mon: #8b4a73;
+  --display: "Bagel Fat One", "Arial Black", Impact, sans-serif;
+  --body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: "Space Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #24081b; --dot: #33102a; --paper: #35102b; --ink: #ffe3f0; --muted: #eaa7cb; --line: #5e2450;
+    --pink: #ff6fb5; --hot: #ff4fa3; --sun: #ffd93d; --sun-ink: #3a2a00;
+    --water: #4a1a3c; --land: #35102b; --park: #1f4a36;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; color: var(--ink); font-family: var(--body); font-size: 15.5px; line-height: 1.5;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--dot) 2.2px, transparent 2.6px);
+  background-size: 22px 22px;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--hot); outline-offset: 2px; border-radius: 8px; }
+.wrap {
+  max-width: 640px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: env(safe-area-inset-top, 0px) 56px;
+}
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
+h3 { margin: 0; font-weight: 900; font-size: 16px; line-height: 1.3; }
+
+/* Hero */
+.hero { padding-block: 26px 10px; display: grid; gap: 12px; }
+.madeby { justify-self: start; font-family: var(--display); font-size: 15px; padding: 5px 14px; border-radius: 999px; background: var(--sun); color: var(--sun-ink); transform: rotate(-3deg); box-shadow: 3px 3px 0 var(--ink); }
+.hero h1 { font-size: clamp(52px, 17vw, 92px); line-height: .86; color: var(--hot); text-shadow: 4px 4px 0 var(--paper), 7px 7px 0 var(--ink); letter-spacing: .5px; }
+.hero h1 span { display: block; color: var(--pink); transform: rotate(-2deg); transform-origin: left; }
+.sub { font-weight: 800; color: var(--muted); max-width: 52ch; margin: 0; }
+.crew { display: flex; flex-wrap: wrap; gap: 6px; }
+.crew span { font-weight: 900; font-size: 13.5px; background: var(--paper); border: 2px solid var(--ink); border-radius: 999px; padding: 2px 11px; }
+.crew span:nth-child(odd) { transform: rotate(-2deg); } .crew span:nth-child(even) { transform: rotate(2deg); }
+
+/* Nav */
+nav.days { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); overflow-x: auto; scrollbar-width: none; border-bottom: 2px dashed var(--line); }
+nav.days::-webkit-scrollbar { display: none; }
+nav.days ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; width: max-content; }
+nav.days a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 900; font-size: 13.5px; padding: 5px 12px; border-radius: 999px; background: var(--paper); border: 2px solid var(--ink); white-space: nowrap; }
+.blob { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: 50% 45% 55% 48%; font-family: var(--display); font-size: 12px; color: #fff; }
+
+section { scroll-margin-top: 66px; padding-top: 30px; }
+.card { background: var(--paper); border: 2.5px solid var(--ink); border-radius: 22px; box-shadow: 5px 5px 0 var(--ink); padding: 16px 16px 14px; }
+.sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.sec-head .blob { width: 46px; height: 46px; font-size: 22px; transform: rotate(-6deg); }
+.sec-head h2 { font-size: 30px; line-height: 1; }
+.date { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.wx { margin-left: auto; font-weight: 900; font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--bg); border: 2px dashed var(--line); white-space: nowrap; }
+.wx.rain { background: var(--sun); color: var(--sun-ink); border: 2px solid var(--ink); }
+.lede { color: var(--muted); font-weight: 600; margin: 4px 0 10px; max-width: 60ch; }
+
+/* Timeline */
+ol.tl { list-style: none; margin: 0; padding: 0; position: relative; }
+ol.tl::before { content: ""; position: absolute; left: 53px; top: 10px; bottom: 10px; width: 0; border-left: 3px dotted var(--day); }
+ol.tl > li { display: grid; grid-template-columns: 46px 16px minmax(0, 1fr); gap: 0 9px; padding-block: 8px; }
+.tl time { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; padding-top: 2px; font-variant-numeric: tabular-nums; }
+.tl .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--paper); border: 3px solid var(--day); margin-top: 3px; position: relative; z-index: 1; }
+.tl .voted .dot, .tl .hl .dot { background: var(--day); }
+.tl .body { min-width: 0; }
+.tl p { margin: 2px 0 0; color: var(--muted); font-size: 14.5px; }
+.tl ul.ideas { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; display: grid; gap: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+.tag { font-weight: 900; font-size: 11.5px; letter-spacing: .03em; text-transform: uppercase; padding: 1px 8px; border-radius: 6px; border: 2px solid var(--ink); }
+.tag.must { background: var(--pink); color: #fff; border-color: var(--ink); }
+.tag.vote { background: var(--sun); color: var(--sun-ink); }
+.tag.opt { background: var(--paper); }
+.tag.who { background: var(--bg); }
+.maplink { font-size: 13.5px; font-weight: 800; text-decoration: none; border-bottom: 2.5px solid var(--pink); }
+.voteline { font-size: 13px; font-weight: 800; color: var(--hot); margin-top: 4px; }
+.route { display: inline-flex; margin-top: 10px; text-decoration: none; font-weight: 900; font-size: 14px; padding: 9px 15px; border-radius: 999px; background: var(--ink); color: var(--paper); }
+
+/* Vote */
+.btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-family: var(--display); font-size: 20px; padding: 10px 20px; border-radius: 999px; background: var(--pink); color: #fff; border: 2.5px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg); }
+.btn:active { transform: translate(2px, 2px) rotate(-1.5deg); box-shadow: 2px 2px 0 var(--ink); }
+.status { font-weight: 800; color: var(--muted); font-size: 14px; }
+.polls { display: grid; gap: 12px; margin-top: 14px; }
+.q h3 { font-size: 17px; }
+.opts { display: grid; gap: 7px; margin-top: 8px; }
+.opt { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; align-items: center; border: 2px solid var(--line); border-radius: 12px; padding: 8px 11px; background: var(--paper); }
+.opt .fill { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--pink); opacity: .22; transition: width .4s ease; }
+.opt > *:not(.fill) { position: relative; }
+.opt .lbl { font-weight: 800; font-size: 14.5px; }
+.opt .n { font-family: var(--mono); font-size: 15px; }
+.opt .who { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); font-weight: 700; }
+.opt.lead { border-color: var(--ink); }
+.opt.lead .lbl::after { content: " ★"; color: var(--hot); }
+@media (prefers-reduced-motion: reduce) { .opt .fill { transition: none; } }
+
+/* Map */
+.mapbox { border: 2.5px solid var(--ink); border-radius: 18px; overflow: hidden; background: var(--water); box-shadow: 5px 5px 0 var(--ink); }
+.mapbox svg { display: block; width: 100%; height: auto; }
+.mapfilters { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 12px; }
+.mapfilters button { font: inherit; font-weight: 900; font-size: 13px; padding: 4px 12px; border-radius: 999px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; }
+.mapfilters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.legend { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 5px; }
+.legend li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 8px; align-items: center; font-size: 14.5px; font-weight: 700; }
+.legend a { text-decoration: none; border-bottom: 2px solid var(--line); }
+.legend small { color: var(--muted); font-weight: 600; }
+
+.tips { display: grid; gap: 10px; }
+.tips .card h3 { font-family: var(--display); font-weight: 400; font-size: 19px; margin-bottom: 2px; }
+.tips p, .tips ul { margin: 0; color: var(--muted); font-weight: 600; font-size: 14.5px; }
+.tips ul { padding-left: 18px; }
+footer { margin-top: 30px; text-align: center; font-family: var(--display); color: var(--pink); font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="madeby">Made by Emile hé</div>
+    <h1>NYC Pink <span>Week</span></h1>
+    <p class="sub">Tue 24 – Mon 30 Nov 2026 · Thanksgiving week · home: Outpost Williamsburg, 186 N 6th St (L at Bedford Av)</p>
+    <div class="crew"><span>Wannes</span><span>Aaike</span><span>Stinne</span><span>Emile</span></div>
+  </header>
+
+  <nav class="days" aria-label="Jump to"><ul id="nav"></ul></nav>
+
+  <section id="vote">
+    <div class="card">
+      <div class="sec-head"><span class="blob" style="background:var(--hot)">?</span><div><div class="date">Everyone votes</div><h2>The vote</h2></div></div>
+      <p class="lede">Pick your name, tick your choices. Changed your mind? Fill it in again: only your latest answer counts. The plan below rewrites itself with whatever is winning.</p>
+      <a id="votebtn" class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScbq2uYMi8IkJZuz9kMkTaKFWb9G0A029r55KB2pFhuTfzMxw/viewform" target="_blank" rel="noopener">Vote now</a>
+      <p id="waiting" class="status"></p>
+      <p id="pollstatus" class="status" hidden></p>
+    </div>
+    <div class="polls" id="poll"></div>
+  </section>
+
+  <div id="days"></div>
+
+  <section id="map">
+    <div class="sec-head"><span class="blob" style="background:var(--ink);color:var(--paper)">M</span><div><div class="date">Tap a pin for directions</div><h2>Map</h2></div></div>
+    <div class="mapfilters" id="mapfilters" role="group" aria-label="Filter map by day"></div>
+    <div class="mapbox"><svg id="mapsvg" role="img" aria-label="Map of Manhattan, Brooklyn and Staten Island's ferry terminal with the week's stops"></svg></div>
+    <ul class="legend" id="legend"></ul>
+  </section>
+
+  <section id="tips">
+    <div class="sec-head"><span class="blob" style="background:var(--ink);color:var(--paper)">i</span><div><div class="date">Read once</div><h2>Good to know</h2></div></div>
+    <div class="tips">
+      <div class="card"><h3>Weather</h3><p>Cool, 8–13°C (46–55°F). Thursday (Thanksgiving) brings heavy rain and wind: bring a raincoat, not an umbrella. Friday to Sunday look dry with sun and clouds. Sunset is around 4:30pm, so plan the views early.</p></div>
+      <div class="card"><h3>Thanksgiving = closed</h3><p>On Thursday a lot of shops and some restaurants close or keep short hours. Friday is Black Friday: shops open early and it gets crowded. Check opening hours before you go anywhere on Thursday.</p></div>
+      <div class="card"><h3>Subway</h3><p>Tap your own contactless card or phone at the gate. About $3 a ride; after 12 rides in 7 days the rest of the week is free. Our line is the L from Bedford Av.</p></div>
+      <div class="card"><h3>Going out</h3><ul><li>Be in line before 11pm.</li><li>Get tickets or a guest-list spot during the day.</li><li>Bring your passport: 21+ and ID checks everywhere.</li></ul></div>
+    </div>
+  </section>
+
+  <footer>see you in the city ♥</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScbq2uYMi8IkJZuz9kMkTaKFWb9G0A029r55KB2pFhuTfzMxw/viewform";
+  var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWgPrP7mG2dDSJL3B83w3G9OxOyVV2CcnVIbYKmhSmVfaB451L5iHRN12j-IO7toJmcf6fbRf6Uiug/pub?gid=1995163468&single=true&output=csv";
+  var CREW = ["Wannes", "Aaike", "Stinne", "Emile"];
+  var NAME_Q = "Who are you?";
+  var gm = function (q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q); };
+  function P(n, q, lat, lon) { return { n: n, q: q, lat: lat, lon: lon }; }
+
+  /* ---------- Vote questions (labels must match the form exactly) ---------- */
+  var POLL = [
+    { id: "eve", title: "Wednesday night (Thanksgiving Eve)", opts: [
+      { label: "Bars in Williamsburg", h: "Thanksgiving Eve: bar hop in Williamsburg", p: "One of the busiest bar nights of the year, and it's right around the corner. No tickets needed.", pin: P("Williamsburg bars", "Bedford Ave & N 7th St, Brooklyn", 40.7190, -73.9560) },
+      { label: "Harbor NYC party (Hell's Kitchen)", h: "Thanksgiving Eve party at Harbor NYC", p: "621 W 46th St. Hip-hop, R&B and open format until 4am. Buy tickets in advance.", pin: P("Harbor NYC", "Harbor NYC, 621 W 46th St, New York", 40.7640, -73.9968) },
+      { label: "Chill night in", h: "Chill night in", p: "Pizza, drinks at home, early night. Energy saved for the weekend.", pin: null }
+    ] },
+    { id: "parade", title: "Thursday morning: the 100th Macy's Parade", opts: [
+      { label: "Go and watch (rain gear!)", h: "The 100th Macy's Thanksgiving Parade", p: "8:30 to noon. Central Park West in the 60s/70s is a good spot: be there around 7:00, it's the 100th one and it will be packed. Raincoats, not umbrellas.", pin: P("Parade spot: Central Park West & 72nd", "Central Park West & W 72nd St, New York", 40.7766, -73.9761) },
+      { label: "Sleep in, watch on TV", h: "Sleep in, parade on TV", p: "It airs live from 8:30. Then a slow breakfast at home.", pin: null }
+    ] },
+    { id: "view", title: "Friday sunset: view from the top", opts: [
+      { label: "Summit One Vanderbilt", h: "Sunset at Summit One Vanderbilt", p: "Mirror rooms and glass ledges, right next to Grand Central. Book a time slot around 4pm.", pin: P("Summit One Vanderbilt", "Summit One Vanderbilt, New York", 40.7530, -73.9787) },
+      { label: "Edge (Hudson Yards)", h: "Sunset at Edge", p: "Outdoor sky deck with a glass floor at Hudson Yards. Book a time slot around 4pm.", pin: P("Edge, Hudson Yards", "Edge Hudson Yards, New York", 40.7537, -74.0011) },
+      { label: "Top of the Rock", h: "Sunset at Top of the Rock", p: "The classic view with the Empire State Building and Central Park. Book a time slot around 4pm.", pin: P("Top of the Rock", "Top of the Rock, New York", 40.7593, -73.9794) },
+      { label: "Skip it", h: "No view deck this time", p: "More time for Black Friday shopping and a drink at golden hour.", pin: null }
+    ] },
+    { id: "museum", title: "Saturday museum", opts: [
+      { label: "The Met", h: "The Met", p: "Huge art museum on the edge of Central Park. Don't try to see it all: pick two wings.", pin: P("The Met", "The Metropolitan Museum of Art", 40.7794, -73.9632) },
+      { label: "Natural History", h: "American Museum of Natural History", p: "Dinosaurs and the giant blue whale, on the west side of the park.", pin: P("Natural History Museum", "American Museum of Natural History", 40.7813, -73.9740) },
+      { label: "MoMA", h: "MoMA", p: "Van Gogh, Warhol and friends in Midtown.", pin: P("MoMA", "Museum of Modern Art, New York", 40.7614, -73.9776) },
+      { label: "Museum of Ice Cream", h: "Museum of Ice Cream", p: "558 Broadway, SoHo. Pink, silly, with a sprinkle pool. Book a time slot.", pin: P("Museum of Ice Cream", "Museum of Ice Cream, 558 Broadway, New York", 40.7237, -73.9977) },
+      { label: "No museum", h: "No museum: more park", p: "More Central Park and a walk down the Upper East Side.", pin: null }
+    ] },
+    { id: "night", title: "Big night out: which night?", opts: [
+      { label: "Friday 27" }, { label: "Saturday 28" }, { label: "Both!" }
+    ] },
+    { id: "party", title: "Big night out: where?", opts: [
+      { label: "Marquee (Chelsea)", h: "Party at Marquee", p: "289 10th Ave. Big club, hip-hop and open format, 11pm to 4am. Tickets or guest list during the day.", pin: P("Marquee", "Marquee New York, 289 10th Ave", 40.7500, -74.0027) },
+      { label: "Polygon Brooklyn: all R&B night", h: "All-R&B night at Polygon Brooklyn", p: "R&B classics, 2000s favourites and today's hits all night. Buy tickets in advance.", pin: null },
+      { label: "The DL (Lower East Side)", h: "Party at The DL", p: "95 Delancey St. Club with a rooftop, hip-hop, pop and R&B.", pin: P("The DL", "The DL, 95 Delancey St, New York", 40.7188, -73.9892) },
+      { label: "Loosie's (Williamsburg)", h: "Party at Loosie's", p: "Dance bar close to home, the DJs play a mix of everything. Easy walk back.", pin: P("Loosie's", "Loosie's, 91 S 6th St, Brooklyn", 40.7105, -73.9654) },
+      { label: "Le Bain (Meatpacking)", h: "Party at Le Bain", p: "Rooftop on The Standard hotel with skyline views. Check the DJ first: mostly house music.", pin: P("Le Bain", "Le Bain, The Standard High Line, New York", 40.7409, -74.0080) }
+    ] }
+  ];
+  var Q = {}; POLL.forEach(function (q) { Q[q.id] = q; });
+
+  /* ---------- The week ---------- */
+  var DAYS = [
+    { id: "tue", b: "T", name: "Hello NYC", date: "Tue 24 Nov · tonight", color: "var(--tue)", wx: null,
+      lede: "Land, drop the bags, first drink.",
+      items: [
+        { t: "Eve", h: "Land at JFK & get to Outpost Williamsburg", p: "AirTrain to Jamaica (pay about $8.50 at the exit), J train to Broadway Junction, change to the L and get off at Bedford Av. Outpost is a 2-minute walk, 186 N 6th St. About 1h15, about $11.50 each; tap your card at every gate.", pin: P("Home: Outpost Williamsburg", "Outpost Club Williamsburg House, 186 N 6th St, Brooklyn", 40.7183, -73.9566) },
+        { t: "Late", h: "Welcome drink around Bedford Av" }
+      ] },
+    { id: "wed", b: "W", name: "Ferry & shopping", date: "Wed 25 Nov", color: "var(--wed)", wx: "8°C · windy later",
+      lede: "Emile works, so the two of you go shopping. Everyone meets up in the evening.",
+      items: [
+        { t: "10:30", h: "Staten Island Ferry from Whitehall", p: "Free, every 15–30 minutes, 25 minutes across. Stand on the right side on the way out for the Statue of Liberty.", who: "the two of you", pin: P("Staten Island Ferry (Whitehall)", "Whitehall Terminal, New York", 40.7013, -74.0131) },
+        { t: "11:15", h: "Shopping at Empire Outlets", p: "Outlet mall right next to the ferry terminal on Staten Island. Normally open 10am–8pm; check holiday hours.", who: "the two of you", pin: P("Empire Outlets", "Empire Outlets, Staten Island", 40.6437, -74.0736) },
+        { t: "15:00", h: "Ferry back to Manhattan", who: "the two of you" },
+        { t: "16:00", h: "Macy's balloon inflation", p: "The parade balloons get blown up next to the Natural History Museum (W 77th–81st St). Public viewing roughly 1–6pm with long lines; check Macy's for the final times.", tags: ["opt"], pin: P("Balloon inflation", "W 79th St & Central Park West, New York", 40.7820, -73.9725) },
+        { t: "19:00", poll: "eve", tags: ["vote"] }
+      ] },
+    { id: "thu", b: "T", name: "Thanksgiving", date: "Thu 26 Nov", color: "var(--thu)", wx: "11°C · heavy rain", rain: true,
+      lede: "Parade in the morning, together for lunch. From 4pm the hosts are at a Thanksgiving dinner and the two of you have the city to yourselves. Many places are closed today.",
+      items: [
+        { t: "07:00", poll: "parade", tags: ["vote"] },
+        { t: "12:30", h: "Lunch together somewhere warm", p: "Chinatown and diners are the safest bets on Thanksgiving. Check it's open first." },
+        { t: "16:00", h: "Hosts off to Thanksgiving dinner", p: "Emile and his girlfriend leave for dinner." },
+        { t: "16:00", h: "Rainy Thanksgiving night for the two of you", who: "the two of you", ideas: [
+          "Thanksgiving dinner out: lots of restaurants serve a holiday menu. Book today (Time Out has a list of places open on Thanksgiving).",
+          "A film: the big cinemas around Times Square are usually open on holidays.",
+          "Times Square and Rockefeller Center lit up at night: 10 minutes apart, mostly sheltered by scaffolding and doorways.",
+          "Dumplings in Chinatown: many spots there stay open on Thanksgiving.",
+          "Bars that stay open: Time Out keeps a list of bars open on Thanksgiving."
+        ], pin: P("Times Square", "Times Square, New York", 40.7580, -73.9855) },
+        { t: "22:30", h: "Nightcap together", p: "Meet back in Williamsburg after dinner.", tags: ["opt"] }
+      ] },
+    { id: "fri", b: "F", name: "Black Friday", date: "Fri 27 Nov", color: "var(--fri)", wx: "13°C · sun, then clouds",
+      lede: "Shops open early and get busy. View at sunset, and maybe the big night out.",
+      items: [
+        { t: "10:30", h: "Black Friday shopping in SoHo", p: "Broadway and the side streets. Go early, it gets crowded fast.", pin: P("SoHo shopping", "Broadway & Prince St, New York", 40.7246, -73.9977) },
+        { t: "13:00", h: "Bryant Park Winter Village", p: "Holiday market stalls, food, and a free ice rink (pay for skates).", pin: P("Bryant Park Winter Village", "Bryant Park, New York", 40.7536, -73.9832) },
+        { t: "14:30", h: "Holiday windows on Fifth Avenue", p: "Walk up Fifth from 42nd to 59th: department store windows and the big stores.", pin: P("Fifth Avenue windows", "Saks Fifth Avenue, New York", 40.7580, -73.9771) },
+        { t: "16:00", poll: "view", tags: ["vote"] },
+        { t: "19:30", h: "Dinner" },
+        { t: "22:30", poll: "party", night: ["Friday 27", "Both!"], tags: ["vote"] }
+      ] },
+    { id: "sat", b: "S", name: "Park, museum, tram", date: "Sat 28 Nov", color: "var(--sat)", wx: "11°C · sun & clouds",
+      lede: "The dry day for the outdoor classics.",
+      items: [
+        { t: "10:30", h: "Brunch in Williamsburg" },
+        { t: "11:30", h: "Central Park walk", p: "Columbus Circle → Bethesda Terrace → Bow Bridge → the Mall. Late-autumn colours.", tags: ["must"], pin: P("Central Park (Bethesda Terrace)", "Bethesda Terrace, Central Park", 40.7740, -73.9708) },
+        { t: "13:30", poll: "museum", tags: ["vote"] },
+        { t: "16:00", h: "Roosevelt Island Tram", p: "59th St & 2nd Ave. Same price as a subway ride, tap your card. Ride over at sunset (about 4:30), walk a bit, ride back.", tags: ["must"], pin: P("Roosevelt Island Tram", "Roosevelt Island Tramway, E 59th St, New York", 40.7612, -73.9644) },
+        { t: "19:30", h: "Dinner" },
+        { t: "22:30", poll: "party", night: ["Saturday 28", "Both!"], tags: ["vote"] }
+      ] },
+    { id: "sun", b: "S", name: "Skating & Brooklyn", date: "Sun 29 Nov", color: "var(--sun-day)", wx: "13°C · sun & clouds",
+      lede: "Slow morning, ice skating by the river, last night together.",
+      items: [
+        { t: "11:00", h: "Brunch in Williamsburg" },
+        { t: "12:30", h: "Ice skating at Domino Park", p: "Outdoor rink on the East River with the Manhattan skyline. Weekends from 10:30am. About $24 entry + $13 skates for visitors; buy tickets online at dominopark.com.", tags: ["must"], pin: P("Domino Park ice rink", "Domino Park, 15 River St, Brooklyn", 40.7146, -73.9686) },
+        { t: "14:30", h: "Brooklyn Bridge & DUMBO", p: "If you didn't do it last time: the Washington St photo spot, then walk the bridge into Manhattan.", tags: ["opt"], pin: P("DUMBO (Washington St)", "Washington Street & Water Street, Brooklyn", 40.7033, -73.9894) },
+        { t: "19:00", h: "Last-night dinner", p: "Somewhere nice in Williamsburg, all four of us." }
+      ] },
+    { id: "mon", b: "M", name: "Fly home", date: "Mon 30 Nov", color: "var(--mon)", wx: "11°C · cloudy",
+      lede: "Flight at 4:40pm.",
+      items: [
+        { t: "09:30", h: "Bagels & pack" },
+        { t: "13:00", h: "Leave for the airport", p: "Flight departs 4:40pm, so be at the airport by about 2:15. To JFK: the L from Bedford Av to Broadway Junction, the J to Sutphin Blvd–Archer Av, then the AirTrain (about 1h15).", tags: ["must"] }
+      ] }
+  ];
+
+  /* ---------- Votes ---------- */
+  var votes = {};
+  function tally(qid) {
+    var q = Q[qid], counts = {}, voters = {};
+    q.opts.forEach(function (o) { counts[o.label] = 0; voters[o.label] = []; });
+    Object.keys(votes).forEach(function (name) {
+      var a = votes[name][qid];
+      if (a && counts[a] !== undefined) { counts[a]++; voters[a].push(name); }
+    });
+    var max = 0; Object.keys(counts).forEach(function (k) { if (counts[k] > max) max = counts[k]; });
+    var lead = max ? q.opts.filter(function (o) { return counts[o.label] === max; }) : [];
+    var total = 0; Object.keys(counts).forEach(function (k) { total += counts[k]; });
+    return { counts: counts, voters: voters, lead: lead, max: max, total: total };
+  }
+
+  /* resolve a poll-driven item into what to show */
+  function resolve(it) {
+    var t = tally(it.poll), q = Q[it.poll];
+    if (it.night) {
+      var nt = tally("night");
+      if (nt.lead.length) {
+        var on = nt.lead.some(function (o) { return it.night.indexOf(o.label) > -1; });
+        if (!on) return { skip: true, h: "No big night out tonight", p: "The vote put the party on the other night. Bars near home if you feel like it.", line: "Night vote: " + nt.lead.map(function (o) { return o.label; }).join(" / ") };
+      }
+    }
+    if (!t.lead.length) {
+      return { h: q.title, p: "Not decided yet. Options: " + q.opts.map(function (o) { return o.label; }).join(", ") + ".", line: "No votes yet: vote above", pending: true };
+    }
+    var win = t.lead[0];
+    var line = t.lead.length > 1 ? "Tie: " + t.lead.map(function (o) { return o.label; }).join(" / ") + " (" + t.max + " each)" : "Winning with " + t.max + " of " + t.total + " votes";
+    return { h: win.h, p: win.p, pin: win.pin, line: line, voted: true };
+  }
+
+  /* ---------- Render ---------- */
+  var nav = document.getElementById("nav");
+  nav.innerHTML = [["vote", "?", "Vote", "var(--hot)"]].concat(DAYS.map(function (d) { return [d.id, d.b, d.date.slice(0, 6), d.color]; })).concat([["map", "M", "Map", "var(--ink)"], ["tips", "i", "Tips", "var(--ink)"]]).map(function (n) {
+    return '<li><a href="#' + n[0] + '"><span class="blob" style="background:' + n[3] + ';color:' + (n[3] === "var(--ink)" ? "var(--paper)" : "#fff") + '">' + n[1] + "</span>" + n[2] + "</a></li>";
+  }).join("");
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  var allPins = [];
+  function renderDays() {
+    allPins = []; var no = 0;
+    document.getElementById("days").innerHTML = DAYS.map(function (d) {
+      var routeStops = [];
+      var rows = d.items.map(function (it) {
+        var h = it.h, p = it.p, pin = it.pin, line = "", cls = "";
+        if (it.poll) { var r = resolve(it); h = r.h; p = r.p; pin = r.pin || null; line = r.line; cls = r.voted ? "voted" : ""; }
+        if (pin) { no++; pin = { n: pin.n, q: pin.q, lat: pin.lat, lon: pin.lon, no: no, day: d }; allPins.push(pin); routeStops.push(pin.q); }
+        var tags = (it.tags || []).map(function (t) { return '<span class="tag ' + t + '">' + ({ must: "Must", vote: "Voted", opt: "Optional" })[t] + "</span>"; }).join("");
+        if (it.who) tags += '<span class="tag who">' + esc(it.who) + "</span>";
+        var link = pin ? '<a class="maplink" href="' + gm(pin.q) + '" target="_blank" rel="noopener">Map #' + pin.no + "</a>" : "";
+        var ideas = it.ideas ? '<ul class="ideas">' + it.ideas.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "";
+        return '<li class="' + cls + '"><time>' + it.t + '</time><span class="dot"></span><div class="body"><h3>' + esc(h) + "</h3>" +
+          (p ? "<p>" + esc(p) + "</p>" : "") + ideas + (line ? '<div class="voteline">' + esc(line) + "</div>" : "") +
+          ((tags || link) ? '<div class="tags">' + tags + link + "</div>" : "") + "</div></li>";
+      }).join("");
+      var route = "";
+      if (routeStops.length >= 2) {
+        var url = "https://www.google.com/maps/dir/?api=1&travelmode=transit&origin=" + encodeURIComponent(routeStops[0]) + "&destination=" + encodeURIComponent(routeStops[routeStops.length - 1]);
+        if (routeStops.length > 2) url += "&waypoints=" + encodeURIComponent(routeStops.slice(1, -1).join("|"));
+        route = '<a class="route" href="' + url + '" target="_blank" rel="noopener">' + d.date.slice(0, 3) + "'s route in Google Maps</a>";
+      }
+      return '<section id="' + d.id + '" style="--day:' + d.color + '"><div class="card">' +
+        '<div class="sec-head"><span class="blob" style="background:' + d.color + '">' + d.b + '</span><div><div class="date">' + d.date + "</div><h2>" + d.name + "</h2></div>" +
+        (d.wx ? '<span class="wx' + (d.rain ? " rain" : "") + '">' + d.wx + "</span>" : "") + "</div>" +
+        '<p class="lede">' + esc(d.lede) + '</p><ol class="tl">' + rows + "</ol>" + route + "</div></section>";
+    }).join("");
+  }
+
+  function renderPoll() {
+    var el = document.getElementById("poll"); el.innerHTML = "";
+    POLL.forEach(function (q) {
+      var t = tally(q.id);
+      var box = document.createElement("div"); box.className = "card q";
+      var h = document.createElement("h3"); h.textContent = q.title; box.appendChild(h);
+      var opts = document.createElement("div"); opts.className = "opts";
+      q.opts.forEach(function (o) {
+        var row = document.createElement("div"); row.className = "opt" + (t.max && t.counts[o.label] === t.max ? " lead" : "");
+        var fill = document.createElement("span"); fill.className = "fill"; fill.style.width = t.total ? (t.counts[o.label] / t.total * 100) + "%" : "0";
+        var l = document.createElement("span"); l.className = "lbl"; l.textContent = o.label;
+        var n = document.createElement("span"); n.className = "n"; n.textContent = String(t.counts[o.label]);
+        row.append(fill, l, n);
+        if (t.voters[o.label].length) { var w = document.createElement("span"); w.className = "who"; w.textContent = t.voters[o.label].join(", "); row.appendChild(w); }
+        opts.appendChild(row);
+      });
+      box.appendChild(opts); el.appendChild(box);
+    });
+    var missing = CREW.filter(function (n) { return !votes[n]; });
+    document.getElementById("waiting").textContent = missing.length ? "Still to vote: " + missing.join(", ") : "Everyone has voted!";
+  }
+
+  /* ---------- Map ---------- */
+  var W = 760, LON0 = -74.085, LON1 = -73.92, LAT0 = 40.635, LAT1 = 40.805;
+  var H = Math.round(W * ((LAT1 - LAT0) * 111) / ((LON1 - LON0) * 84.3));
+  var svg = document.getElementById("mapsvg"); svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  function X(lon) { return ((lon - LON0) / (LON1 - LON0) * W).toFixed(1); }
+  function Y(lat) { return ((LAT1 - lat) / (LAT1 - LAT0) * H).toFixed(1); }
+  function poly(pts) { return "M" + pts.map(function (p) { return X(p[1]) + " " + Y(p[0]); }).join(" L") + " Z"; }
+  var SHAPES = {
+    nj: [[40.81,-74.09],[40.81,-73.984],[40.790,-73.993],[40.775,-74.003],[40.760,-74.014],[40.745,-74.025],[40.725,-74.031],[40.710,-74.035],[40.700,-74.046],[40.690,-74.058],[40.675,-74.066],[40.662,-74.075],[40.652,-74.09]],
+    si: [[40.6455,-74.09],[40.6458,-74.0790],[40.6440,-74.0725],[40.6395,-74.0700],[40.6300,-74.0690],[40.6300,-74.09]],
+    bk: [[40.630,-74.040],[40.640,-74.036],[40.650,-74.027],[40.660,-74.021],[40.670,-74.020],[40.683,-74.012],[40.690,-74.003],[40.697,-73.999],[40.7035,-73.993],[40.7040,-73.985],[40.7000,-73.977],[40.7040,-73.970],[40.7100,-73.968],[40.7170,-73.964],[40.7250,-73.961],[40.7350,-73.959],[40.7420,-73.956],[40.7500,-73.951],[40.7580,-73.946],[40.7680,-73.937],[40.7750,-73.932],[40.7820,-73.926],[40.7880,-73.921],[40.810,-73.915],[40.630,-73.915]],
+    mn: [[40.7003,-74.0155],[40.7045,-74.0190],[40.7110,-74.0170],[40.7200,-74.0130],[40.7300,-74.0115],[40.7400,-74.0110],[40.7480,-74.0090],[40.7560,-74.0040],[40.7650,-73.9980],[40.7730,-73.9930],[40.7820,-73.9870],[40.7920,-73.9800],[40.810,-73.9680],[40.810,-73.9330],[40.7960,-73.9290],[40.7880,-73.9370],[40.7770,-73.9420],[40.7680,-73.9490],[40.7600,-73.9570],[40.7500,-73.9665],[40.7420,-73.9715],[40.7330,-73.9730],[40.7260,-73.9720],[40.7180,-73.9740],[40.7110,-73.9770],[40.7090,-73.9880],[40.7070,-73.9990],[40.7040,-74.0060],[40.7015,-74.0110]],
+    ri: [[40.7505,-73.9615],[40.7600,-73.9530],[40.7720,-73.9405],[40.7712,-73.9393],[40.7593,-73.9503],[40.7498,-73.9603]],
+    gi: [[40.6935,-74.0185],[40.6922,-74.0120],[40.6870,-74.0128],[40.6850,-74.0220],[40.6890,-74.0242]],
+    cp: [[40.7681,-73.9819],[40.7644,-73.9730],[40.7968,-73.9493],[40.8005,-73.9580]]
+  };
+  function txt(x, y, s, size, rot, extra) {
+    return '<text x="' + x + '" y="' + y + '" font-size="' + size + '"' + (rot ? ' transform="rotate(' + rot + " " + x + " " + y + ')"' : "") + (extra || "") + ">" + s + "</text>";
+  }
+  var base = '<rect width="' + W + '" height="' + H + '" fill="var(--water)"/>' +
+    ["nj", "si", "bk", "mn", "ri", "gi"].map(function (k) { return '<path d="' + poly(SHAPES[k]) + '" fill="var(--land)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>'; }).join("") +
+    '<path d="' + poly(SHAPES.cp) + '" fill="var(--park)"/>' +
+    '<circle cx="' + X(-74.0445) + '" cy="' + Y(40.6892) + '" r="8" fill="var(--land)" stroke="var(--line)" stroke-width="3"/>' +
+    '<g font-family="Bagel Fat One, Arial Black, sans-serif" fill="var(--muted)" opacity=".75" letter-spacing="2">' +
+      txt(X(-74.004), Y(40.748), "MANHATTAN", 24, -61) + txt(X(-73.975), Y(40.672), "BROOKLYN", 24) +
+      txt(X(-73.946), Y(40.735), "QUEENS", 16) + txt(X(-74.082), Y(40.790), "NEW JERSEY", 16) + txt(X(-74.088), Y(40.6375), "STATEN ISLAND", 15) +
+    "</g>" +
+    '<g font-family="Nunito, Arial, sans-serif" font-style="italic" font-weight="700" fill="var(--muted)" font-size="15" opacity=".85">' +
+      txt(X(-74.035), Y(40.752), "Hudson River", 15, -62) + txt(X(-73.968), Y(40.708), "East River", 15, -58) +
+      txt(X(-74.047), Y(40.6838), "Statue of Liberty", 15) + txt(X(-74.040), Y(40.666), "Upper Bay", 15) + txt(X(-73.972), Y(40.789), "Central Park", 15, -58) +
+    "</g>";
+  var pinsG = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  var filter = "all";
+  function drawMap() {
+    svg.innerHTML = base; svg.appendChild(pinsG);
+    var shown = allPins.filter(function (p) { return filter === "all" || p.day.id === filter; });
+    pinsG.innerHTML = shown.map(function (p) {
+      var x = X(p.lon), y = Y(p.lat);
+      return '<a href="' + gm(p.q) + '" target="_blank" rel="noopener"><title>' + esc(p.n) + "</title>" +
+        '<circle cx="' + x + '" cy="' + y + '" r="16" fill="' + p.day.color + '" stroke="var(--ink)" stroke-width="3"/>' +
+        '<text x="' + x + '" y="' + (+y + 5.5) + '" text-anchor="middle" font-family="Bagel Fat One, Arial Black, sans-serif" font-size="15" fill="#fff">' + p.no + "</text></a>";
+    }).join("");
+    document.getElementById("legend").innerHTML = shown.map(function (p) {
+      return '<li><span class="blob" style="background:' + p.day.color + '">' + p.no + '</span><span><a href="' + gm(p.q) + '" target="_blank" rel="noopener">' + esc(p.n) + "</a> <small>· " + p.day.date.slice(0, 3) + "</small></span></li>";
+    }).join("");
+    Array.prototype.forEach.call(document.querySelectorAll("#mapfilters button"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.f === filter)); });
+  }
+  document.getElementById("mapfilters").innerHTML = '<button type="button" id="f-all" data-f="all">All</button>' + DAYS.map(function (d) {
+    return '<button type="button" id="f-' + d.id + '" data-f="' + d.id + '">' + d.date.slice(0, 3) + "</button>";
+  }).join("");
+  document.getElementById("mapfilters").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; filter = b.dataset.f; drawMap(); });
+
+  function renderAll() { renderPoll(); renderDays(); drawMap(); }
+
+  /* ---------- Load votes from the published sheet ---------- */
+  function parseCSV(text) {
+    var rows = [], row = [], cell = "", q = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (q) { if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; } else if (c === '"') q = false; else cell += c; }
+      else if (c === '"') q = true;
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") { if (c === "\r" && text[i + 1] === "\n") i++; row.push(cell); rows.push(row); row = []; cell = ""; }
+      else cell += c;
+    }
+    if (cell || row.length) { row.push(cell); rows.push(row); }
+    return rows;
+  }
+  var statusEl = document.getElementById("pollstatus");
+  function setStatus(m) { statusEl.textContent = m || ""; statusEl.hidden = !m; }
+  function load() {
+    fetch(CSV_URL + "&t=" + Date.now()).then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); }).then(function (text) {
+      var rows = parseCSV(text); if (!rows.length) return;
+      var head = rows[0].map(function (h) { return h.trim(); });
+      var nameCol = head.indexOf(NAME_Q), next = {};
+      rows.slice(1).forEach(function (r) {
+        var name = (r[nameCol] || "").trim(); if (CREW.indexOf(name) < 0) return;
+        var v = {};
+        POLL.forEach(function (q) {
+          var col = head.indexOf(q.title), ans = col > -1 ? (r[col] || "").trim() : "";
+          if (q.opts.some(function (o) { return o.label === ans; })) v[q.id] = ans;
+        });
+        next[name] = v;
+      });
+      votes = next; renderAll(); setStatus("");
+    }).catch(function () { setStatus("Results couldn't load right now. Retrying every minute."); });
+  }
+
+  renderAll();
+  load();
+  setInterval(load, 60000);
+})();
+</script>
+</body>
+</html>
